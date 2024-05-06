@@ -24,7 +24,8 @@ def process():
         instance = Similarity(text, number)
         result = instance.similarity_percentage()
         result_json=json.dumps(result, indent=4, ensure_ascii=False, sort_keys=False)
-        response=Response(result_json, content_type='/process; charset=utf-8')
+        response=Response(result_json, content_type='/process/; charset=utf-8')
+        response.headers['Content-Disposition'] = 'attachment; filename=result.json'
         return  response
     
     return 'Not allowed method', 405
