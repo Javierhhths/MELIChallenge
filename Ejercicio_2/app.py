@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, json, render_template, Response, jsonify
 from similarity import Similarity
 
 app = Flask(__name__)
@@ -23,7 +23,9 @@ def process():
 
         instance = Similarity(text, number)
         result = instance.similarity_percentage()
-        return jsonify(result)
+        result_json=json.dumps(result, indent=4, ensure_ascii=False, sort_keys=False)
+
+        return result_json
     
     return 'Not allowed method', 405
 
